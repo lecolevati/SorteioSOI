@@ -1,0 +1,14 @@
+#Fat Jar Configuration File
+#Fri Feb 15 20:51:04 BRST 2013
+onejar.license.required=true
+manifest.classpath=
+manifest.removesigners=true
+onejar.checkbox=false
+jarname=SorteioSOI_fat.jar
+manifest.mergeall=true
+manifest.mainclass=view.Principal
+manifest.file=<createnew>
+jarname.isextern=false
+onejar.expand=
+excludes=
+includes=
