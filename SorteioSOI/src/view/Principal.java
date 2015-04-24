@@ -10,7 +10,8 @@ import javax.swing.AbstractAction;
 import javax.swing.JOptionPane;
 
 import java.awt.event.ActionEvent;
-import javax.swing.Action;
+
+import dao.Dao;
 
 public class Principal {
 
@@ -20,6 +21,7 @@ public class Principal {
 	private final SorteioConsulta sorteioConsulta = new SorteioConsulta();
 	private final SorteiaDatas sorteiaDatas = new SorteiaDatas();
 	private final Sobre sobre = new Sobre();
+	private final LimpaBase limpaBase = new LimpaBase();
 
 	/**
 	 * Launch the application.
@@ -70,6 +72,10 @@ public class Principal {
 		mntmSorteiaDatas.setAction(sorteiaDatas);
 		mnSorteio.add(mntmSorteiaDatas);
 		
+		JMenuItem mntmLimpaBaseDe = new JMenuItem("Limpa Base de Dados");
+		mntmLimpaBaseDe.setAction(limpaBase);
+		mnSorteio.add(mntmLimpaBaseDe);
+		
 		JMenuItem mntmSair = new JMenuItem("Sair");
 		mntmSair.setAction(sair);
 		mnSorteio.add(mntmSair);
@@ -83,6 +89,10 @@ public class Principal {
 	}
 
 	private class Sair extends AbstractAction {
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
 		public Sair() {
 			putValue(NAME, "Sair");
 			putValue(SHORT_DESCRIPTION, "Finaliza");
@@ -92,6 +102,10 @@ public class Principal {
 		}
 	}
 	private class Cadastro extends AbstractAction {
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
 		public Cadastro() {
 			putValue(NAME, "Cadastrar Grupos");
 			putValue(SHORT_DESCRIPTION, "Cadastro");
@@ -102,6 +116,10 @@ public class Principal {
 		}
 	}
 	private class SorteioConsulta extends AbstractAction {
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
 		public SorteioConsulta() {
 			putValue(NAME, "Sorteio e Consulta");
 			putValue(SHORT_DESCRIPTION, "Faz Sorteio e Realiza Consulta");
@@ -112,6 +130,10 @@ public class Principal {
 		}
 	}
 	private class SorteiaDatas extends AbstractAction {
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
 		public SorteiaDatas() {
 			putValue(NAME, "Sorteia Datas");
 			putValue(SHORT_DESCRIPTION, "SorteiaDatas");
@@ -122,6 +144,10 @@ public class Principal {
 		}
 	}
 	private class Sobre extends AbstractAction {
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
 		public Sobre() {
 			putValue(NAME, "Sobre");
 			putValue(SHORT_DESCRIPTION, "Sobre");
@@ -134,6 +160,23 @@ public class Principal {
 				"Sistemas Operacionais I \n \n"+
 				"Todos os Direitos Reservados";
 			JOptionPane.showMessageDialog(null, texto, "Sobre",JOptionPane.INFORMATION_MESSAGE);
+		}
+	}
+	private class LimpaBase extends AbstractAction {
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
+		public LimpaBase() {
+			putValue(NAME, "Limpa Base de Dados");
+			putValue(SHORT_DESCRIPTION, "Limpa Base de Dados");
+		}
+		public void actionPerformed(ActionEvent e) {
+			Dao dao = new Dao();
+			boolean limpo = dao.limpaBase();
+			if (limpo){
+				JOptionPane.showMessageDialog(null, "Base Limpa e Pronta !", "LIMPA", JOptionPane.INFORMATION_MESSAGE);
+			}
 		}
 	}
 }

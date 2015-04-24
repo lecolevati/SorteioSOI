@@ -17,10 +17,13 @@ import dao.Dao;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 
+import controller.RodarController;
+
 public class DiaAp extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField tfLider;
+	private static JButton btnSortear = new JButton("Sortear Apresenta\u00E7\u00E3o");
 
 	/**
 	 * Launch the application.
@@ -31,6 +34,7 @@ public class DiaAp extends JFrame {
 				try {
 					DiaAp frame = new DiaAp();
 					frame.setVisible(true);
+					btnSortear.requestFocus();
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -59,9 +63,10 @@ public class DiaAp extends JFrame {
 		lblGrupo.setBounds(25, 68, 46, 14);
 		contentPane.add(lblGrupo);
 		
-		JButton btnSortear = new JButton("Sortear Apresenta\u00E7\u00E3o");
+		
 		btnSortear.setBounds(25, 134, 179, 23);
 		contentPane.add(btnSortear);
+		
 		
 		JButton btnFechar = new JButton("FECHAR");
 		btnFechar.setBounds(25, 236, 89, 23);
@@ -83,22 +88,7 @@ public class DiaAp extends JFrame {
 			}
 		});
 		
-		btnSortear.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				String turno = String.valueOf(cbTurno.getSelectedItem());
-				Dao dao = new Dao();
-				boolean existe = dao.verificaGruposAp(turno);
-				if (existe){
-					JOptionPane.showMessageDialog(null, "Todos inseridos", "ERRO !!!",
-							JOptionPane.ERROR_MESSAGE);
-					tfLider.setText("");
-				} else {
-					int codGrupo = dao.sorteiaData(turno);
-					String lider = dao.retornaLider(turno, codGrupo);
-					tfLider.setText(lider);
-				}
-			}
-		});
+		RodarController rc = new RodarController(tfLider, cbTurno, btnSortear);
+		btnSortear.addActionListener(rc);
 	}
 }

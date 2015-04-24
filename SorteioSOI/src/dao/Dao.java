@@ -16,6 +16,71 @@ public class Dao {
 
 //	GenericDao genericDao = new GenericDao();
 //	Connection c = genericDao.getConnection();
+
+	public boolean limpaBase(){
+		GenericDao genericDao = new GenericDao();
+		Connection c = genericDao.getConnection();
+		boolean limpo = false;
+		String query1 = "delete temagrupo";
+		String query2 = "delete temagrupon";
+		String query3 = "delete grupotarde";
+		String query4 = "delete gruponoite";
+		String query5 = "DBCC CHECKIDENT (grupotarde, RESEED, 0)";
+		String query6 = "DBCC CHECKIDENT (gruponoite, RESEED, 0)";
+		try {
+			PreparedStatement ps1 = c.prepareStatement(query1);
+			ps1.execute();
+			PreparedStatement ps2 = c.prepareStatement(query2);
+			ps2.execute();
+			PreparedStatement ps3 = c.prepareStatement(query3);
+			ps3.execute();
+			PreparedStatement ps4 = c.prepareStatement(query4);
+			ps4.execute();
+			PreparedStatement ps5 = c.prepareStatement(query5);
+			ps5.execute();
+			PreparedStatement ps6 = c.prepareStatement(query6);
+			ps6.execute();
+			limpo = true;
+		} catch (SQLException e) {
+			JOptionPane.showMessageDialog(null, e.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
+		}
+		return limpo;
+		
+	}
+	
+	public List<String> retornaLideres(String turno){
+		GenericDao genericDao = new GenericDao();
+		Connection c = genericDao.getConnection();
+		List<String> lista = new ArrayList<String>();
+		String lider = "";
+		String queryString = "";
+		if (turno.equals("T")){
+			queryString = "select lider from grupotarde";
+		} else {
+			queryString = "select lider from gruponoite";
+		}
+		ResultSet rs = null;
+		
+		try {
+
+			
+			PreparedStatement ps = c.prepareStatement(queryString);
+			ps.execute();
+			rs = ps.getResultSet();
+			while (rs.next()){
+				lider = rs.getString(1);
+				lista.add(lider);
+			}
+			rs.close();
+			ps.close();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return lista;
+		
+	}
 	
 	public String retornaLider(String turno, int codigoGrupo){
 		GenericDao genericDao = new GenericDao();
