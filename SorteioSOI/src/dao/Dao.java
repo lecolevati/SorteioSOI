@@ -14,12 +14,13 @@ import pojo.Sorteio;
 
 public class Dao {
 
-//	GenericDao genericDao = new GenericDao();
-//	Connection c = genericDao.getConnection();
-
-	public boolean limpaBase(){
+	private Connection c;
+	public Dao(){
 		GenericDao genericDao = new GenericDao();
-		Connection c = genericDao.getConnection();
+		c = genericDao.getConnection();
+	}
+	
+	public boolean limpaBase(){
 		boolean limpo = false;
 		String query1 = "delete temagrupo";
 		String query2 = "delete temagrupon";
@@ -49,8 +50,6 @@ public class Dao {
 	}
 	
 	public List<String> retornaLideres(String turno){
-		GenericDao genericDao = new GenericDao();
-		Connection c = genericDao.getConnection();
 		List<String> lista = new ArrayList<String>();
 		String lider = "";
 		String queryString = "";
@@ -83,8 +82,6 @@ public class Dao {
 	}
 	
 	public String retornaLider(String turno, int codigoGrupo){
-		GenericDao genericDao = new GenericDao();
-		Connection c = genericDao.getConnection();
 		String lider = "";
 		String queryString = "";
 		if (turno.equals("T")){
@@ -115,8 +112,6 @@ public class Dao {
 	}
 	
 	public int sorteiaData (String turno){
-		GenericDao genericDao = new GenericDao();
-		Connection c = genericDao.getConnection();
 		int inserido = 0;
 		int randomGrupo = 0;
 		
@@ -142,8 +137,6 @@ public class Dao {
 
 	public void insereDados (String turno){
 		
-		GenericDao genericDao = new GenericDao();
-		Connection c = genericDao.getConnection();
 		
 		int temas[] = new int[9];
 		int grupos[] = new int[9];
@@ -173,8 +166,6 @@ public class Dao {
 	}
 	
     public List<Sorteio> apresentaSorteio (String turno){
-    	GenericDao genericDao = new GenericDao();
-      	Connection c = genericDao.getConnection();
 		List<Sorteio> listSorteio = new ArrayList<Sorteio>();
 		ResultSet rs = null;
 		String query = "";
@@ -216,9 +207,6 @@ public class Dao {
 	
 	public boolean insereGrupo (String nome, String turno) {
 
-		GenericDao genericDao = new GenericDao();
-		Connection c = genericDao.getConnection();
-		
 		boolean inserido = false;
 		
 		try {
@@ -270,8 +258,6 @@ public class Dao {
 	}
 	
 	public boolean verificaSorteio(String turno){
-		GenericDao genericDao = new GenericDao();
-		Connection c = genericDao.getConnection();
 		boolean sorteado = false;
 		String query = "";
 		ResultSet rs = null;
@@ -301,8 +287,6 @@ public class Dao {
 	}
 
 	public boolean verificaGruposAp(String turno){
-		GenericDao genericDao = new GenericDao();
-		Connection c = genericDao.getConnection();
 		boolean qtd = false;
 		ResultSet rs = null;
 		String query = "";
