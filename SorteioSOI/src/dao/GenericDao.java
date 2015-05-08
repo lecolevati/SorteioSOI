@@ -2,14 +2,12 @@ package dao;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.sql.Statement;
 
 public class GenericDao {
 	
-	private static Statement stmt;   
 	private static Connection con; 
 	
-	public static Connection getConnection() {   
+	public Connection getConnection() {   
 
 		try {   
 			Class.forName("net.sourceforge.jtds.jdbc.Driver");   

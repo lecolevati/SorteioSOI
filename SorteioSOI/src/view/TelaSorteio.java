@@ -1,6 +1,5 @@
 package view;
 
-import java.awt.BorderLayout;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -22,6 +21,10 @@ import pojo.Sorteio;
 
 public class TelaSorteio extends JFrame {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JTextField tfGrupo1;
 	private JTextField tfGrupo2;
@@ -62,6 +65,7 @@ public class TelaSorteio extends JFrame {
 	/**
 	 * Create the frame.
 	 */
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public TelaSorteio() {
 		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		setBounds(100, 100, 800, 600);
@@ -70,7 +74,9 @@ public class TelaSorteio extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
+		@SuppressWarnings("unused")
 		final int grupos[] = new int[9];
+		@SuppressWarnings("unused")
 		final int temas[] = new int[9];
 		
 		tfGrupo1 = new JTextField();
